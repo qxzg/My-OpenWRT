@@ -111,6 +111,7 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         rm -f openwrt/bin/targets/x86/64/openwrt-x86-64-rootfs-ext4.img
+        mv openwrt/bin/targets/x86/64/sha256sums openwrt/bin/targets/x86/64/sha256sums.txt
         cd openwrt/bin/targets/*/*
         rm -rf packages
         echo "::set-env name=FIRMWARE::$(pwd)"
