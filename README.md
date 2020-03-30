@@ -1,3 +1,5 @@
+![Build OpenWrt](https://github.com/qxzg/My-OpenWRT/workflows/Build%20OpenWrt/badge.svg)
+
 # Actions-OpenWrt
 
 [![LICENSE](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square&label=LICENSE)](https://github.com/P3TERX/Actions-OpenWrt/blob/master/LICENSE)
