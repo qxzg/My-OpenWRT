@@ -2,7 +2,6 @@
 
 # Actions-OpenWrt
 
-- [Read the details in my blog (in Chinese) | 中文教程](https://p3terx.com/archives/build-openwrt-with-github-actions.html)
 - [OpenWrt](https://github.com/openwrt/openwrt)
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
 
