@@ -11,4 +11,4 @@
 sed -i '10c\ulimit -n 1000000 && ulimit -p 65000' package/lean/luci-app-ssr-plus/root/etc/init.d/shadowsocksr
 sed -i 's/string="TTL=600"/string="TTL=60"/g' package/lean/ddns-scripts_aliyun/update_aliyun_com.sh
 git clone  https://github.com/skylovebeauty/luci-app-switch-lan-play.git   ./package/luci-app-switch-lan-play
-sed -i 's/DEPENDS:= +switch-lan-play +luci-lib-json/DEPENDS:= +luci-lib-json/g' ./package/luci-app-switch-lan-play/Makefile
+#sed -i 's/DEPENDS:= +switch-lan-play +luci-lib-json/DEPENDS:= +luci-lib-json/g' ./package/luci-app-switch-lan-play/Makefile
