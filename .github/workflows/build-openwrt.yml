@@ -125,11 +125,13 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         tar zcvPf ${FIRMWARE}.tar.gz ${FIRMWARE}
-        ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress ${FIRMWARE}.tar.gz
+        ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress ${FIRMWARE}.tar.gz 2>&1 | tee cowtransfer.log
+        echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
     - name: Upload firmware to WeTransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
         tar zcvPf ${FIRMWARE}.tar.gz ${FIRMWARE}
-        ./transfer wet -s -p 16 --no-progress ${FIRMWARE}.tar.gz
+        ./transfer wet -s -p 16 --no-progress ${FIRMWARE}.tar.gz 2>&1 | tee wetransfer.log
+        echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
