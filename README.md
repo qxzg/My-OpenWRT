@@ -1,6 +1,3 @@
-![Build OpenWrt](https://github.com/qxzg/My-OpenWRT/workflows/Build%20OpenWrt/badge.svg)  
-![Build OpenWrt-au](https://github.com/qxzg/My-OpenWRT/workflows/Build%20OpenWrt-au/badge.svg)
-
 # Actions-OpenWrt
 
 - [OpenWrt](https://github.com/openwrt/openwrt)
