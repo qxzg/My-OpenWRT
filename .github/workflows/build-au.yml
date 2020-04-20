@@ -128,7 +128,7 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
-        tar zcvPf ${FIRMWARE}.tar.gz ${FIRMWARE}
+        tar zcvf ${FIRMWARE}.tar.gz openwrt/bin/targets/x86/64
         ./transfer cow --block 2621440 -s -p 99 -t 3 --hash --no-progress ${FIRMWARE}.tar.gz 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
@@ -136,6 +136,6 @@ jobs:
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
         curl -fsSL git.io/file-transfer | sh
-        tar zcvPf ${FIRMWARE}.tar.gz ${FIRMWARE}
+        tar zcvPf ${FIRMWARE}.tar.gz openwrt/bin/targets/x86/64
         ./transfer wet -s -p 16 --no-progress ${FIRMWARE}.tar.gz 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
