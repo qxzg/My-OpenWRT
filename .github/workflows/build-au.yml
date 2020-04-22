@@ -76,7 +76,7 @@ jobs:
         chmod +x $DIY_SH
         cd openwrt
         ../$DIY_SH
-        echo package/lean/luci-app-frpc/root/etc/init.d/frp
+        echo openwrt/package/lean/luci-app-frpc/root/etc/init.d/frp
 
     - name: SSH connection to Actions
       uses: P3TERX/debugger-action@master
