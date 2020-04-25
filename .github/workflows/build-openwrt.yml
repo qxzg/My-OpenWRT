@@ -17,7 +17,8 @@ on:
       - master
     paths:
       - '.config'
-      - 'diy.sh'
+      - 'diy-part1.sh'
+      - 'diy-part2.sh'
       - '.github/workflows/build-openwrt.yml'
 #  schedule:
 #    - cron: 0 15 * * *

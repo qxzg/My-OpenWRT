@@ -17,7 +17,8 @@ on:
       - master
     paths:
       - 'au.config'
-      - 'diy.au.sh'
+      - 'diy-part1.au.sh'
+      - 'diy-part2.au.sh'
       - '.github/workflows/build-au.yml'
 #  schedule:
 #    - cron: 0 15 * * *
@@ -29,8 +30,8 @@ env:
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: au.config
-  DIY_P1_SH: diy-part1.sh
-  DIY_P2_SH: diy-part2.sh
+  DIY_P1_SH: diy-part1.au.sh
+  DIY_P2_SH: diy-part2.au.sh
   SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
