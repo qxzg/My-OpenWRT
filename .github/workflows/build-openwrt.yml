@@ -146,6 +146,5 @@ jobs:
       run: |
         cd openwrt/bin/targets/x86
         curl -fsSL git.io/file-transfer | sh
-#        tar zcvf ${FIRMWARE}.tar.gz openwrt/bin/targets/x86/64
         ./transfer wet -s -p 16 --no-progress Firmware.tar.gz 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
