@@ -135,15 +135,16 @@ jobs:
     - name: Upload firmware to cowtransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
+        cd openwrt/bin/targets/x86
         curl -fsSL git.io/file-transfer | sh
-        tar zcvf ${FIRMWARE}.tar.gz openwrt/bin/targets/x86/64
-        ./transfer cow --block 2621440 -s -p 64 --no-progress ${FIRMWARE}.tar.gz 2>&1 | tee cowtransfer.log
+        tar zcvf Firmware.tar.gz 64/
+        ./transfer cow --block 2621440 -s -p 64 --no-progress Firmware.tar.gz 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
 
     - name: Upload firmware to WeTransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
+        cd openwrt/bin/targets/x86
         curl -fsSL git.io/file-transfer | sh
-        tar zcvf ${FIRMWARE}.tar.gz openwrt/bin/targets/x86/64
-        ./transfer wet -s -p 16 --no-progress ${FIRMWARE}.tar.gz 2>&1 | tee wetransfer.log
+        ./transfer wet -s -p 16 --no-progress Firmware.tar.gz 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
