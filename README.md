@@ -5,7 +5,7 @@
 
 第三方包：
 
-[luci-app-switch-lan-play](https://github.com/skylovebeauty/luci-app-switch-lan-play)
+~~[luci-app-switch-lan-play](https://github.com/skylovebeauty/luci-app-switch-lan-play)~~
 
 ## License
 
