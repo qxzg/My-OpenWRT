@@ -124,6 +124,7 @@ jobs:
       id: organize
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
+        echo "::warning file=sha256sums::$(cat openwrt/bin/targets/x86/64/sha256sums | grep combined)"
         mv openwrt/bin/targets/x86/64/sha256sums openwrt/bin/targets/x86/64/sha256sums.txt
         rm -f openwrt/bin/targets/x86/64/openwrt-x86-64-generic-ext4-rootfs.img
         rm -f openwrt/bin/targets/x86/64/openwrt-x86-64-generic-kernel.bin
@@ -131,7 +132,6 @@ jobs:
         rm -rf packages
         echo "::set-env name=FIRMWARE::$PWD"
         echo "::set-output name=status::success"
-        echo "::warning file=sha256sums::$(cat openwrt/bin/targets/x86/64/sha256sums.txt | grep combined)"
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@master
