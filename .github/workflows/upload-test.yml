@@ -31,15 +31,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
 
-    - name: SSH connection to Actions
-      uses: P3TERX/debugger-action@master
-      if: contains(github.event.action, 'ssh')
-
     - name: Upload firmware to cowtransfer
       run: |
-        cp $GITHUB_WORKSPACE/Firmware.tar.gz ./
         curl -fsSL git.io/file-transfer | sh
-        ./transfer cow --block 2621440 -s -p 64 --no-progress Firmware.tar.gz 2>&1 | tee cowtransfer.log
+        ./transfer cow --block 2621440 -s -p 16 --no-progress Firmware.tar.gz 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
         ./transfer wet -s -p 16 --no-progress Firmware.tar.gz 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
