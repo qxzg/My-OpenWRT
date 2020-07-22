@@ -11,5 +11,5 @@ jobs:
         uses: yakumioto/serverchan-action@master
         with:
           key: ${{ secrets.SERVERCHAN_KEY }}
-          text: {消息标题}
-          desp: {消息内容 支持MarkDown}
+          text: "消息标题"
+          desp: "消息内容 支持MarkDown"
