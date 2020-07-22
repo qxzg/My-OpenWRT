@@ -1,0 +1,14 @@
+name: serverchan-action-test
+
+on: [push]
+
+jobs:
+  serverchan:
+    name: Serverchan test
+    runs-on: ubuntu-latest
+    steps:
+    - name: ServerChan push
+      env: 
+        SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
+      run: |
+        curl "https://sc.ftqq.com/${SC_KEY}.send??text=主人服务器又挂掉啦~"
