@@ -165,4 +165,5 @@ jobs:
       if: env.SC_PUSH == 'true' && !cancelled()
       env: 
         SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
-      run: curl --retry 5 -d "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[wetransfer](${SC_WETRANSFER:15})%0D%0A%0D%0A####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})%0D%0A%0D%0A####sha256:%0D%0A%0D%0A####\`\`\`${SC_SHA256}\`\`\`" "https://sc.ftqq.com/${SC_KEY}.send"
+        SC_IP: ${{ secrets.SERVERCHAN_IP }}
+      run: curl --max-time 30 --retry 5 --resolve sc.ftqq.com:443:${SC_IP} -d  "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[wetransfer](${SC_WETRANSFER:15})%0D%0A%0D%0A####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})%0D%0A%0D%0A####sha256:%0D%0A%0D%0A####\`\`\`${SC_SHA256}\`\`\`" "https://sc.ftqq.com/${SC_KEY}.send"
