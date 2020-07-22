@@ -11,4 +11,4 @@ jobs:
       env: 
         SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
       run: |
-        curl "https://sc.ftqq.com/"${SC_KEY}".send??text=主人服务器又挂掉啦~"
+        curl "https://sc.ftqq.com/${SC_KEY}.send?text=主人服务器又挂掉啦~"
