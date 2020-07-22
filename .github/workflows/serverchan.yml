@@ -1,0 +1,15 @@
+name: serverchan-action-test
+
+on: [push]
+
+jobs:
+  serverchan:
+    name: Serverchan test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sending message
+        uses: yakumioto/serverchan-action@master
+        with:
+          key: ${{ secrets.SERVERCHAN_KEY }}
+          text: {消息标题}
+          desp: {消息内容 支持MarkDown}
