@@ -15,3 +15,4 @@ jobs:
         SC_WETRANSFER: "Download Link: https://we.tl/t-cXfjWifccS"
       run: |
         curl -d "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[wetransfer](${SC_WETRANSFER:15})++####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_ACTION})++####sha256:++####```${SC_SHA256}```" "https://sc.ftqq.com/${SC_KEY}.send"
+        echo "####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[wetransfer](${SC_WETRANSFER:15})++####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_ACTION})++####sha256:++####```${SC_SHA256}```"
