@@ -17,12 +17,3 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer --no-progress https://we.tl/t-CnAuvPriJV
         ./transfer vim  Firmware.tar.gz
-
-    - name: ServerChan push
-      env: 
-        SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
-        SC_IP: ${{ secrets.SERVERCHAN_IP }}
-        SC_SHA256: "a69e0d878d8f47c514dc59d12853d4b1aea5ad2e4c44753e5a9a21dff556df31 *openwrt-x86-64-generic-ext4-combined-efi.img"
-        SC_COWTRANSFER: "Download Link: https://c-t.work/s/496bc30b37a249"
-        SC_WETRANSFER: "Download Link: https://we.tl/t-cXfjWifccS"
-      run: curl --silent --max-time 30 --retry 5 --resolve sc.ftqq.com:443:${SC_IP} -d  "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[wetransfer](${SC_WETRANSFER:15})%0D%0A%0D%0A####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})%0D%0A%0D%0A####sha256:%0D%0A%0D%0A####\`\`\`${SC_SHA256}\`\`\`" "https://sc.ftqq.com/${SC_KEY}.send"
