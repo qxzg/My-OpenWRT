@@ -16,4 +16,9 @@ jobs:
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer --no-progress https://we.tl/t-CnAuvPriJV
-        ./transfer vim  Firmware.tar.gz
+        ./transfer air Firmware.tar.gz
+        ./transfer bit Firmware.tar.gz
+        ./transfer cat Firmware.tar.gz
+        ./transfer gof Firmware.tar.gz
+        ./transfer flk Firmware.tar.gz
+        ./transfer trs Firmware.tar.gz
