@@ -15,10 +15,8 @@ jobs:
     - name: Upload firmware to WenShuShu
       run: |
         curl -fsSL git.io/file-transfer | sh
-        ./transfer https://we.tl/t-CnAuvPriJV
-        ./transfer vim --no-progress Firmware.tar.gz 2>&1 | tee wenshushu.log
-        echo "::warning file=wenshushu.cn::$(cat wenshushu.log | grep https)"
-        echo "::set-env name=SC_WENSHUSHU::$(cat wenshushu.log | grep https)"
+        ./transfer --no-progress https://we.tl/t-CnAuvPriJV
+        ./transfer vim  Firmware.tar.gz
 
     - name: ServerChan push
       env: 
