@@ -12,13 +12,25 @@ jobs:
     name: Serverchan test
     runs-on: ubuntu-latest
     steps:      
-    - name: Upload firmware to WenShuShu
+    - name: download firmware
       run: |
         curl -fsSL git.io/file-transfer | sh
         ./transfer --no-progress https://we.tl/t-CnAuvPriJV
-        ./transfer air Firmware.tar.gz
-        ./transfer bit Firmware.tar.gz
-        ./transfer cat Firmware.tar.gz
-        ./transfer gof Firmware.tar.gz
-        ./transfer flk Firmware.tar.gz
-        ./transfer trs Firmware.tar.gz
+
+    - name: Upload firmware to air
+      run: ./transfer air Firmware.tar.gz
+
+    - name: Upload firmware to bit
+      run: ./transfer bit Firmware.tar.gz
+
+    - name: Upload firmware to cat
+      run: ./transfer cat Firmware.tar.gz
+
+    - name: Upload firmware to gof
+      run: ./transfer gof Firmware.tar.gz
+
+    - name: Upload firmware to flk
+      run: ./transfer flk Firmware.tar.gz
+
+    - name: Upload firmware to trs
+      run: ./transfer trs Firmware.tar.gz
