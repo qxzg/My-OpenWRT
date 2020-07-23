@@ -37,7 +37,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
   UPLOAD_WETRANSFER: true
-  UPLOAD_WENSHUSHU: true
+  UPLOAD_CATBOX: true
   SC_PUSH: true
   TZ: Asia/Shanghai
 
@@ -162,18 +162,18 @@ jobs:
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
         echo "::set-env name=SC_WETRANSFER::$(cat wetransfer.log | grep https)"
 
-    - name: Upload firmware to WenShuShu
-      if: steps.organize.outputs.status == 'success' && env.UPLOAD_WENSHUSHU == 'true' && !cancelled()
+    - name: Upload firmware to CatBox
+      if: steps.organize.outputs.status == 'success' && env.UPLOAD_CATBOX == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/x86
         curl -fsSL git.io/file-transfer | sh
-        ./transfer wss -s -p 8 --no-progress Firmware.tar.gz 2>&1 | tee wenshushu.log
-        echo "::warning file=wenshushu.cn::$(cat wenshushu.log | grep https)"
-        echo "::set-env name=SC_WENSHUSHU::$(cat wenshushu.log | grep https)"
+        ./transfer cat --no-progress Firmware.tar.gz 2>&1 | tee catbox.log
+        echo "::warning file=catbox.moe::$(cat catbox.log | grep https)"
+        echo "::set-env name=SC_CATBOX::$(cat catbox.log | grep https)"
 
     - name: ServerChan push
       if: env.SC_PUSH == 'true' && !cancelled()
       env: 
         SC_KEY: ${{ secrets.SERVERCHAN_KEY_AU }}
         SC_IP: ${{ secrets.SERVERCHAN_IP }}
-      run: curl --silent --max-time 30 --retry 5 --resolve sc.ftqq.com:443:${SC_IP} -d  "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[文叔叔](${SC_WENSHUSHU:14})+|+[wetransfer](${SC_WETRANSFER:15})%0D%0A%0D%0A####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})%0D%0A%0D%0A####sha256:%0D%0A%0D%0A####\`\`\`${SC_SHA256}\`\`\`" "https://sc.ftqq.com/${SC_KEY}.send"
+      run: curl --silent --max-time 30 --retry 5 --resolve sc.ftqq.com:443:${SC_IP} -d  "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[CatBox](${SC_CATBOX:15})+|+[wetransfer](${SC_WETRANSFER:15})%0D%0A%0D%0A####[Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})%0D%0A%0D%0A####sha256:%0D%0A%0D%0A####\`\`\`${SC_SHA256}\`\`\`" "https://sc.ftqq.com/${SC_KEY}.send"
