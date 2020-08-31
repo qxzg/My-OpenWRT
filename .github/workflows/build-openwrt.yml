@@ -11,7 +11,8 @@ name: Build OpenWrt
 on:
   repository_dispatch:
   release:
-    types: published
+    types: 
+      - published
   push:
     branches:
       - master
@@ -64,7 +65,7 @@ jobs:
         sudo chown $USER:$GROUPS /workdir
 
     - name: Clone source code
-      run: git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
+      run: git clone $REPO_URL -b $REPO_BRANCH openwrt
 
     - name: Load custom feeds
       run: |
