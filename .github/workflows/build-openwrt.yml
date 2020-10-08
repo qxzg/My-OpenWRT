@@ -109,8 +109,8 @@ jobs:
         make -j$(nproc) || make -j1 || make -j1 V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
-        [ -s DEVICE_NAME ] && echo "::set-env name=DEVICE_NAME::_$(cat DEVICE_NAME)"
-        echo "::set-env name=FILE_DATE::_$(date +"%Y%m%d%H%M")"
+        [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
+        echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
     - name: Check space usage
       if: (!cancelled())
@@ -128,13 +128,13 @@ jobs:
       if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
       run: |
         echo "::warning file=sha256sums::$(cat openwrt/bin/targets/x86/64/sha256sums | grep combined)"
-        echo "::set-env name=SC_SHA256::$(cat openwrt/bin/targets/x86/64/sha256sums | grep combined)"
+        echo "SC_SHA256=$(cat openwrt/bin/targets/x86/64/sha256sums | grep combined)" >> $GITHUB_ENV
         mv openwrt/bin/targets/x86/64/sha256sums openwrt/bin/targets/x86/64/sha256sums.txt
         rm -f openwrt/bin/targets/x86/64/openwrt-x86-64-generic-ext4-rootfs.img
         rm -f openwrt/bin/targets/x86/64/openwrt-x86-64-generic-kernel.bin
         cd openwrt/bin/targets/*/*
         rm -rf packages
-        echo "::set-env name=FIRMWARE::$PWD"
+        echo "FIRMWARE=$(PWD)" >> $GITHUB_ENV
         echo "::set-output name=status::success"
 
     - name: Upload firmware directory
@@ -152,7 +152,7 @@ jobs:
         tar zcvf Firmware.tar.gz 64/
         ./transfer cow --block 2621440 -s -p 8 --no-progress Firmware.tar.gz 2>&1 | tee cowtransfer.log
         echo "::warning file=cowtransfer.com::$(cat cowtransfer.log | grep https)"
-        echo "::set-env name=SC_COWTRANSFER::$(cat cowtransfer.log | grep https)"
+        echo "SC_COWTRANSFER=$(cat cowtransfer.log | grep https)" >> $GITHUB_ENV
 
     - name: Upload firmware to WeTransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
@@ -161,7 +161,7 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer wet -s -p 8 --no-progress Firmware.tar.gz 2>&1 | tee wetransfer.log
         echo "::warning file=wetransfer.com::$(cat wetransfer.log | grep https)"
-        echo "::set-env name=SC_WETRANSFER::$(cat wetransfer.log | grep https)"
+        echo "SC_WETRANSFER=$(cat wetransfer.log | grep https)" >> $GITHUB_ENV
 
     - name: Upload firmware to CatBox
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_CATBOX == 'true' && !cancelled()
@@ -170,7 +170,7 @@ jobs:
         curl -fsSL git.io/file-transfer | sh
         ./transfer cat --no-progress Firmware.tar.gz 2>&1 | tee catbox.log
         echo "::warning file=catbox.moe::$(cat catbox.log | grep https)"
-        echo "::set-env name=SC_CATBOX::$(cat catbox.log | grep https)"
+        echo "SC_CATBOX=$(cat catbox.log | grep https)" >> $GITHUB_ENV
 
     - name: ServerChan push
       if: env.SC_PUSH == 'true' && !cancelled()
