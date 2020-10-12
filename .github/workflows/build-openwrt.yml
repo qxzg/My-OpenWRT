@@ -10,9 +10,12 @@ name: Build OpenWrt
 
 on:
   repository_dispatch:
-  release:
-    types: 
-      - published
+  workflow_dispatch:
+    inputs:
+      ssh:
+        description: 'SSH connection to Actions'
+        required: false
+        default: 'false'
   push:
     branches:
       - master
@@ -21,10 +24,6 @@ on:
       - 'diy-part1.sh'
       - 'diy-part2.sh'
       - '.github/workflows/build-openwrt.yml'
-#  schedule:
-#    - cron: 0 15 * * *
-#  watch:
-#    types: started
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -33,7 +32,6 @@ env:
   CONFIG_FILE: .config
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
-  SSH_ACTIONS: false
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_COWTRANSFER: true
@@ -45,7 +43,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-18.04
-    if: github.event.repository.owner.id == github.event.sender.id
 
     steps:
     - name: Checkout
