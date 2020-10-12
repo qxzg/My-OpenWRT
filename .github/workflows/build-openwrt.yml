@@ -145,6 +145,7 @@ jobs:
         path: ${{ env.FIRMWARE }}
 
     - name: Upload firmware to cowtransfer
+      id: cowtransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_COWTRANSFER == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/x86
@@ -155,6 +156,7 @@ jobs:
         echo "SC_COWTRANSFER=$(cat cowtransfer.log | grep https)" >> $GITHUB_ENV
 
     - name: Upload firmware to WeTransfer
+      id: wetransfer
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_WETRANSFER == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/x86
@@ -164,6 +166,7 @@ jobs:
         echo "SC_WETRANSFER=$(cat wetransfer.log | grep https)" >> $GITHUB_ENV
 
     - name: Upload firmware to CatBox
+      id: catbox
       if: steps.organize.outputs.status == 'success' && env.UPLOAD_CATBOX == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/x86
