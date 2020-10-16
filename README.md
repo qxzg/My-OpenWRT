@@ -1,3 +1,5 @@
+[![Build OpenWrt](https://github.com/qxzg/My-OpenWRT/workflows/Build%20OpenWrt/badge.svg)](https://github.com/qxzg/My-OpenWRT/actions?query=workflow%3A%22Build+OpenWrt%22)
+
 # Actions-OpenWrt
 
 - [OpenWrt](https://github.com/openwrt/openwrt)
