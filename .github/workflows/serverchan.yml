@@ -12,25 +12,8 @@ jobs:
     name: Serverchan test
     runs-on: ubuntu-latest
     steps:      
-    - name: download firmware
-      run: |
-        curl -fsSL git.io/file-transfer | sh
-        ./transfer --no-progress https://we.tl/t-CnAuvPriJV
-
-    - name: Upload firmware to air
-      run: ./transfer air Firmware.tar.gz
-
-    - name: Upload firmware to bit
-      run: ./transfer bit Firmware.tar.gz
-
-    - name: Upload firmware to cat
-      run: ./transfer cat Firmware.tar.gz
-
-    - name: Upload firmware to gof
-      run: ./transfer gof Firmware.tar.gz
-
-    - name: Upload firmware to flk
-      run: ./transfer flk Firmware.tar.gz
-
-    - name: Upload firmware to trs
-      run: ./transfer trs Firmware.tar.gz
+    - name: sc
+      env: 
+        SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
+        SC_IP: ${{ secrets.SERVERCHAN_IP }}
+      run: curl --silent --max-time 30 --retry 5 -d  "text=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传]" "https://sc.ftqq.com/${SC_KEY}.send"
