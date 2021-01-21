@@ -16,4 +16,4 @@ jobs:
       env: 
         SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
         SCT_KEY: ${{ secrets.SERVERCHANT_KEY }}
-      run: curl --silent --max-time 30 --retry 5 -d  "title=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=####编译结果下载地址：[奶牛快传]" "https://sctapi.ftqq.com/${SCT_KEY}.send"
+      run: curl --silent --max-time 30 --retry 5 -d  "title=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=#### 编译结果下载地址：[奶牛快传]" "https://sctapi.ftqq.com/${SCT_KEY}.send"
