@@ -1,4 +1,4 @@
-name: serverchan-action-test
+name: action-test
 
 on:
   push:
@@ -9,11 +9,14 @@ on:
 
 jobs:
   serverchan:
-    name: Serverchan test
+    name: test
     runs-on: ubuntu-latest
     steps:      
-    - name: sc
-      env: 
-        SC_KEY: ${{ secrets.SERVERCHAN_KEY }}
-        SCT_KEY: ${{ secrets.SERVERCHANT_KEY }}
-      run: curl --silent --max-time 30 --retry 5 -d  "title=您的OpenWRT系统已经编译完成啦ヾ(≧▽≦*)o&desp=#### 编译结果下载地址：[奶牛快传](${SC_COWTRANSFER:15})+|+[CatBox](${SC_CATBOX:15})+|+[wetransfer](${SC_WETRANSFER:15})%0D%0A%0D%0A#### [Link+To+GitHub+Actions](https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID})%0D%0A%0D%0A#### sha256:%0D%0A%0D%0A#### \`\`\`${SC_SHA256}\`\`\`" "https://sctapi.ftqq.com/${SCT_KEY}.send"
+    - name: Remove old Releases
+      uses: dev-drprasad/delete-older-releases@v0.1.0
+      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+      with:
+        keep_latest: 1
+        delete_tags: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
