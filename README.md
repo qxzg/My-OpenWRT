@@ -2,7 +2,6 @@
 
 # Actions-OpenWrt
 
-- [OpenWrt](https://github.com/openwrt/openwrt)
 - [Lean's OpenWrt](https://github.com/coolsnowwolf/lede)
 
 第三方包：
